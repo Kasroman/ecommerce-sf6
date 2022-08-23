@@ -11,7 +11,7 @@ trait SlugTrait
 
     public function getSlug(): ?string
     {
-        return $this->created_at;
+        return $this->slug;
     }
 
     public function setSlug(string $slug): self

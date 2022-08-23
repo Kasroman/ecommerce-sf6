@@ -27,12 +27,12 @@ class ProductsFixtures extends Fixture
             }
             $product->setName($name);
             $this->words[] = $name;
-
+            
             $product->setDescription($faker->text());
             $product->setSlug($this->slugger->slug($product->getName())->lower());
             $product->setPrice($faker->numberBetween(100, 150000));
             $product->setStock($faker->numberBetween(0, 10));
-            $category = $this->getReference('cat-' . rand(1, 6));
+            $category = $this->getReference('cat-' . rand(1, 10));
             $product->setCategories($category);
             $manager->persist($product);
             $this->addReference('prod-' . $prod, $product);

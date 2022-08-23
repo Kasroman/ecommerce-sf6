@@ -15,17 +15,25 @@ class CategoriesFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $parent = $this->createCategory($manager, 'Informatique');
+        $informatique = $this->createCategory($manager, 'Informatique');
 
-        $this->createCategory($manager, 'Ordinateurs Portables', $parent);
+        $this->createCategory($manager, 'Ordinateurs Portables', $informatique);
 
-        $this->createCategory($manager, 'Ecrans', $parent);
+        $this->createCategory($manager, 'Ecrans', $informatique);
 
-        $peripheriques = $this->createCategory($manager, 'Périphériques', $parent);
+        $this->createCategory($manager, 'Composants', $informatique);
 
-        $this->createCategory($manager, 'Souris', $peripheriques);
+        $this->createCategory($manager, 'Souris', $informatique);
 
-        $this->createCategory($manager, 'Clavier', $peripheriques);
+        $vetements = $this->createCategory($manager, 'Vetements');
+
+        $this->createCategory($manager, 'Pantalon', $vetements);
+
+        $this->createCategory($manager, 'Accessoires', $vetements);
+
+        $this->createCategory($manager, 'Hauts', $vetements);
+
+        $this->createCategory($manager, 'Chaussures', $vetements);
 
         $manager->flush();
     }
@@ -34,6 +42,7 @@ class CategoriesFixtures extends Fixture
     {
         $category = new Categories();
         $category->setName($name);
+        $category->setCategoryOrder($this->counter);
         $category->setSlug($this->slugger->slug($category->getName())->lower());
         if($parent){
             $category->setParent($parent);
